@@ -58,6 +58,9 @@ class FilesystemFactory implements FilesystemFactoryInterface
             $year  = $hours[0];
             $hours = array('00', '00');
         } else {
+            if((new \DateTime(sprintf("%s-%s-%s %s:%s", $year, $parts[5], str_pad($parts[6], 2, '0', STR_PAD_LEFT), $hours[0], $hours[1])))->getTimestamp() > time()){
+                $year = (new \DateTime('first day of last year'))->format('Y');
+            }
             $year = date('Y');
         }
 
